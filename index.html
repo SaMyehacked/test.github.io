@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Sister Love</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#ff9ecb,#ffc9de);
+overflow:hidden;
+}
+
+.container{
+text-align:center;
+}
+
+h1{
+color:white;
+font-size:2.2rem;
+margin-bottom:30px;
+}
+
+button{
+padding:12px 30px;
+font-size:18px;
+border:none;
+border-radius:30px;
+margin:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#yes{
+background:#ff2e7a;
+color:white;
+}
+
+#yes:hover{
+transform:scale(1.1);
+}
+
+#no{
+background:white;
+color:#ff2e7a;
+position:absolute;
+}
+
+.popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:25px 40px;
+border-radius:15px;
+font-size:20px;
+box-shadow:0 0 20px rgba(0,0,0,0.2);
+display:none;
+z-index:10;
+}
+
+.heart{
+position:fixed;
+color:#ff2e7a;
+font-size:20px;
+animation:float 4s linear infinite;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0);
+opacity:1;
+}
+100%{
+transform:translateY(-600px);
+opacity:0;
+}
+}
+
+.confetti{
+position:fixed;
+width:8px;
+height:8px;
+background:red;
+animation:fall 3s linear infinite;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-10px) rotate(0deg);
+}
+100%{
+transform:translateY(700px) rotate(360deg);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Do you love your little sister? 💕</h1>
+
+<button id="yes">Yes</button>
+<button id="no">No</button>
+
+</div>
+
+<div class="popup" id="popup">
+I knew it! You really love your little sister ❤️
+</div>
+
+<audio id="sound">
+<source src="https://www.soundjay.com/buttons/sounds/button-3.mp3">
+</audio>
+
+<script>
+
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+const popup=document.getElementById("popup");
+const sound=document.getElementById("sound");
+
+noBtn.addEventListener("mouseover",()=>{
+
+const x=Math.random()*(window.innerWidth-100);
+const y=Math.random()*(window.innerHeight-50);
+
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
+
+});
+
+yesBtn.addEventListener("click",()=>{
+
+popup.style.display="block";
+
+document.body.style.background=
+"linear-gradient(135deg,#ff4da6,#ff85c1)";
+
+sound.play();
+
+createHearts();
+createConfetti();
+
+});
+
+function createHearts(){
+
+setInterval(()=>{
+
+const heart=document.createElement("div");
+heart.classList.add("heart");
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+15)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},4000);
+
+},200);
+
+}
+
+function createConfetti(){
+
+for(let i=0;i<100;i++){
+
+const conf=document.createElement("div");
+conf.classList.add("confetti");
+
+conf.style.left=Math.random()*100+"vw";
+conf.style.background=
+"rgb("+Math.random()*255+","+
+Math.random()*255+","+
+Math.random()*255+")";
+
+conf.style.animationDuration=
+(Math.random()*3+2)+"s";
+
+document.body.appendChild(conf);
+
+setTimeout(()=>{
+conf.remove();
+},4000);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
